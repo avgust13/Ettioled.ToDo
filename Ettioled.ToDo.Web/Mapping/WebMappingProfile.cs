@@ -12,9 +12,7 @@ namespace Ettioled.ToDo.Web.Mapping
     {
         public WebMappingProfile()
         {
-            //CreateMap<ChannelEventData, VideoViewModel>();
             CreateMap<ToDoViewModel, ToDoData>();
-               // .ForMember(d => d.ChannelEventId, o => o.MapFrom(s => s.Id));
         }
     }
 }
