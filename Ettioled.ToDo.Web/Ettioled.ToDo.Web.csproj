@@ -239,6 +239,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-Ettioled.ToDo.Web-20190427075302.mdf" />
+    <Content Include="App_Data\aspnet-Ettioled.ToDo.Web-20190427075302_log.ldf">
+      <DependentUpon>aspnet-Ettioled.ToDo.Web-20190427075302.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -336,9 +340,7 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Ettioled.ToDo.Business\Ettioled.ToDo.Business.csproj">
       <Project>{8FADC375-5A5D-4F74-822C-84952CE3A407}</Project>
