@@ -1,0 +1,33 @@
+﻿using Ettioled.ToDo.Web.App_Start;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Http;
+using System.Web.Mvc;
+using System.Web.Optimization;
+using System.Web.Routing;
+
+namespace Ettioled.ToDo.Web
+{
+    public class MvcApplication : System.Web.HttpApplication
+    {
+        protected void Application_Start()
+        {
+            InjectorConfig.RegisterInjector();
+            AreaRegistration.RegisterAllAreas();
+
+
+            GlobalConfiguration.Configure(WebApiConfig.Register);
+
+            //WebApiConfig.Register(GlobalConfiguration.Configuration);
+
+
+
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
+            MapperConfig.RegisterMaps();
+        }
+    }
+}

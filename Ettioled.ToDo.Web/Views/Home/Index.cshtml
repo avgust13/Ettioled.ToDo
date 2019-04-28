@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@using (Html.BeginForm("Add", "Home"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    <div class="input-group mb-2 mt-2">
+        @Html.TextBox("description", "", new { @class = "form-control", placeholder = "Enter new Task" })
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Add</button>
+        </div>
+    </div>
+}
+<div class="card-columns">
+    @foreach (var item in Model)
+    {
+        <div class="card" id="todoCard@(item.ToDoId)">
+            <div class="card-body">
+                @Html.CheckBox("isDone", (bool)item.IsDone, new { id = "cardCb" + item.ToDoId })
+                <p class="card-text">
+                    <textarea class="form-control" id="cardText@(item.ToDoId)" rows="3">@item.Description</textarea>
+                </p>
+                <a href="javascript:updateCard(@item.ToDoId)" class="btn btn-light btn-sm">Update</a>
+                <a href="javascript:deleteCard(@item.ToDoId)" class="btn btn-danger btn-sm">Delete</a>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Last updated: <span id="cardUpdated@(item.ToDoId)">@item.LastUpdatedDate.ToString("dd/MM/yyyy HH:mm:ss")</span></small>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    function updateCard(id) {
+        $.ajax({
+            type: "POST", url: "/home/update/",
+            data: '{id: ' + id + ', isDone: ' + $('#cardCb' + id).prop('checked') + ', description: "' + $('#cardText' + id).val() + '" }',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                $('#cardUpdated' + id).text(data.updated);
+            }
+        });
+    }
+
+    function deleteCard(id){
+        $.ajax({
+            type: "GET", url: "/api/todo/delete/" + id,
+            success: $('#todoCard' + id).fadeOut(300, function () { $(this).remove(); })
+        });
+    }
+</script>
